@@ -50,9 +50,8 @@ function Filemap() {
           
         </div>
         <div> 
-        {/* <embed src={require('../uploads/ad34c0c9506888477d761c1337799030')} width="500px" height="375px" type="application/pdf"/> */}
         </div>
-        {/* <Add/> */}
+        <Add/>
         <Addfile/>
         <Back/>
     </>

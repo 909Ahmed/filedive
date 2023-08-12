@@ -10,6 +10,7 @@ import {
   Route,  
   Routes
 } from "react-router-dom";
+import View from './components/View';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/" element={<Filemap key="account"/>}></Route>
           <Route exact path='/login' element={<Verify go="login" key="login"/>}></Route>
           <Route exact path='/sign' element={<Verify go="sign" key="signup"/>}></Route>
+          <Route exact path='/view' element={<View name={'hehe.pdf.pdf'}/>}></Route>
         </Routes>
       </BrowserRouter>
     </FileState>

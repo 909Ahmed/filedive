@@ -11,21 +11,12 @@ const storage = multer.diskStorage({
     cb(null, 'src/uploads');
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + '.pdf');
+    cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
 
-router.post('/fetchfiles',fetchUser ,async (req,res)=>{
-  try {
-      let files = await File.find({parent : req.body.parent ,user : req.user.id})
-      res.json(files)
-  } catch (error) {
-      console.log(error.message);
-      res.status(500).send("some error occured")
-  }
-})
 
 router.post('/upload' ,fetchUser ,upload.single("file") ,async (req,res)=>{
     try {

@@ -1,14 +1,12 @@
 import React from 'react'
-// import { useContext } from 'react';
-// import fileContext from '../context/filecontext';
+import { useContext } from 'react';
+import fileContext from '../context/filecontext';
 
 function Addfile() {
 
-    // const context = useContext(fileContext);
+    const context = useContext(fileContext);
 
-    // const {addfolder ,parent} = context;
-
-    let parent = '5ce819935e539c343f141ece';
+    const {addfolder ,parent} = context;
 
     const submit = async (e) => {
         e.preventDefault();
