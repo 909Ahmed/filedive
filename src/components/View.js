@@ -1,14 +1,14 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
 
-function View({ routes }) {
+function View( props ) {
     
-    // let {name} = routes.params
-    console.log(routes);
+    let {name} = props
 
     return (
     <>
         <div className='view' style={{marginTop:'50px'}}>
-            <embed className='pdf' src={require(`../uploads/sample.pdf`)} type="application/pdf"/>
+            <embed className='pdf' src={require(`../uploads/${name}`)} type="application/pdf"/>
         </div>
     </>
   )

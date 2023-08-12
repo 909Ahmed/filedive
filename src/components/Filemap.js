@@ -46,11 +46,6 @@ function Filemap() {
                 })}
             </div>
         </div>
-        <div>
-          
-        </div>
-        <div> 
-        </div>
         <Add/>
         <Addfile/>
         <Back/>
