@@ -3,11 +3,13 @@ const router = express.Router();
 const Folder = require('../modules/Folder')
 var fetchUser = require('../middleware/fetchUser');
 const User = require('../modules/User');
+const File = require('../modules/File')
 
 router.post('/fetchfolders',fetchUser ,async (req,res)=>{
     try {
-        const folders = await Folder.find({parent : req.body.parent ,user : req.user.id})
-        res.json(folders)
+        let folders = await Folder.find({parent : req.body.parent ,user : req.user.id})
+        let files = await File.find({parent : req.body.parent ,user : req.user.id})
+        res.json(folders.concat(files))
     } catch (error) {
         console.log(error.message);
         res.status(500).send("some error occured")

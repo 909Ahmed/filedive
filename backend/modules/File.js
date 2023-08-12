@@ -6,6 +6,12 @@ const FileSchema = new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'user'
     },
+    name :{
+        type : String
+    },
+    parent :{
+        type : String
+    },
     path:{
         type :String,
         require :true

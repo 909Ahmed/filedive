@@ -17,23 +17,34 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//auth token nikal bhai
+router.post('/fetchfiles',fetchUser ,async (req,res)=>{
+  try {
+      let files = await File.find({parent : req.body.parent ,user : req.user.id})
+      res.json(files)
+  } catch (error) {
+      console.log(error.message);
+      res.status(500).send("some error occured")
+  }
+})
 
-router.post('/upload' ,upload.single("file") ,async (req,res)=>{
+router.post('/upload' ,fetchUser ,upload.single("file") ,async (req,res)=>{
     try {
-
+        
         const fileData = {
+            user : req.user.id,
+            name : req.file.originalname,
             path: req.file.path,
             originalName: req.file.originalname,
+            parent : req.body.parent
         }
 
         const file = await File.create(fileData)
         let success = true
-        res.send(file)
+        res.send(success)
 
     } catch (error) {
         console.log(error.message);
-        res.status(500).send("some error occured")
+        res.status(500).send("some error occuredss")
     }
 })
 

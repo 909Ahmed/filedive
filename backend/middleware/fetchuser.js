@@ -2,9 +2,10 @@ var jwt = require('jsonwebtoken');
 const JWT_SECRET = 'ASecretKey';
 
 const fetchUser = (req ,res ,next)=>{
-    const token = req.header('auth-token');
+    let token = req.header('auth-token');
+    
     if(!token){
-        res.status(401).send({error : "Please valid token ,first"})
+        res.status(401).send({error : "Please valid token ,fasdf"})
     }
     try{
         const data = jwt.verify(token ,JWT_SECRET);
