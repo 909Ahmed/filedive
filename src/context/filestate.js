@@ -39,6 +39,19 @@ function FileState(props) {
     
     }
 
+    const userdet = async () =>{
+
+      const response = await fetch(`${host}/api/auth/Userdet`, {
+        method: "POST",
+        headers: {
+          "auth-token" : localStorage.getItem('token')
+        }
+      });
+
+      const json = await response.json();
+      return json;  
+    }
+
     const redo = async (parentPass) =>{
         
         const response = await fetch(`${host}/api/folder/getparent`, {
@@ -68,7 +81,7 @@ function FileState(props) {
     
     return (
     <>
-        <fileContext.Provider value={{folder , getfolders ,addfolder ,parent ,redo ,naming ,settitle ,title}}>
+        <fileContext.Provider value={{folder , getfolders ,addfolder ,parent ,redo ,naming ,settitle ,title ,userdet}}>
             {props.children}
         </fileContext.Provider>
     </>
