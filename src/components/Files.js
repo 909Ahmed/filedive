@@ -2,20 +2,16 @@ import React, { useState ,useEffect } from 'react'
 import { useContext } from 'react';
 import fileContext from '../context/filecontext';
 import { useNavigate } from 'react-router-dom';
-import io from "socket.io-client";
 
 function Files(props) {
   
-  const socket = io.connect("http://localhost:3001");
 
   const navigate = useNavigate();
   const context = useContext(fileContext);
 
-  let {getfolders ,naming ,parent ,settitle ,userdet} = context;
+  let {getfolders ,naming ,parent ,settitle } = context;
   const [name, setname] = useState(props.element.name)
   const [change, setchange] = useState(true)
-  const [user, setuser] = useState('hehe')
-  const [link, setlink] = useState('huhu')
 
   const dbl = () => {
     setchange(false)
@@ -28,31 +24,10 @@ function Files(props) {
     }
   });
 
-  socket.emit("send_person", user);
-  socket.emit("send_link", { link, user });
-
-  socket.on("receive_link", (data) => {
-    console.log(data.link);
-  });
-
   const onChange = (e)=>{
     setname(e.target.value)
   }
 
-
-  const det = async () => {
-    let data = await userdet();
-  }
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      det();
-    } else {
-      navigate('/login')
-    }
-  }, [])
-  
-  
   return (
     <>
         <div className='file container'>
