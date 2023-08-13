@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/" element={<Filemap key="account"/>}></Route>
           <Route exact path='/login' element={<Verify go="login" key="login"/>}></Route>
           <Route exact path='/sign' element={<Verify go="sign" key="signup"/>}></Route>
-          <Route path='/view' element={<View name={'hehe.pdf.pdf'}/>}></Route>
+          <Route exact path='/view' element={<View key="pdfView"/>}></Route>
         </Routes>
       </BrowserRouter>
     </FileState>

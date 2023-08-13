@@ -8,6 +8,7 @@ function FileState(props) {
 
     const [folder, setfolder] = useState([])
     const [parent, setparent] = useState('5ce819935e539c343f141ece')
+    const [title , settitle] = useState('check.pdf')
 
     const getfolders = async (parentPass) =>{
         const response = await fetch(`${host}/api/folder/fetchfolders`, {
@@ -67,7 +68,7 @@ function FileState(props) {
     
     return (
     <>
-        <fileContext.Provider value={{folder , getfolders ,addfolder ,parent ,redo ,naming}}>
+        <fileContext.Provider value={{folder , getfolders ,addfolder ,parent ,redo ,naming ,settitle ,title}}>
             {props.children}
         </fileContext.Provider>
     </>

@@ -1,14 +1,17 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import fileContext from '../context/filecontext';
 
 function View( props ) {
     
-    let {name} = props
+
+    const context = useContext(fileContext);
+    let {title} = context;
 
     return (
     <>
         <div className='view' style={{marginTop:'50px'}}>
-            <embed className='pdf' src={require(`../uploads/${name}`)} type="application/pdf"/>
+            <embed className='pdf' src={require(`../uploads/${title}`)} type="application/pdf"/>
         </div>
     </>
   )
