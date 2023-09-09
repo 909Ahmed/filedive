@@ -34,7 +34,7 @@ function Addfile() {
     <>
         <div className='container'>
             <form onSubmit={submit}>
-                <label class="file-upload">
+                <label className="file-upload">
                     <input type="file" name='file' required/> Add PDF
                 </label>
                 <button type="submit" className="btn btn-primary">Add</button> 

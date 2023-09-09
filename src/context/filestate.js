@@ -68,14 +68,20 @@ function FileState(props) {
 
     const naming = async (id ,name) => {
       
-      const response = await fetch(`${host}/api/folder/updatename/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        }, body: JSON.stringify({name})
-      });
-      // eslint-disable-next-line
-      const json = await response.json();
+      try {
+        const response = await fetch(`${host}/api/folder/updatename/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          }, body: JSON.stringify({name})
+        });
+        // eslint-disable-next-line
+        const json = await response.json();  
+      } catch (error) {
+        
+        console.log(error);
+      }
+      
     }
     
     return (
