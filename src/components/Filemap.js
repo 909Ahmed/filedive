@@ -11,30 +11,46 @@ import io from 'socket.io-client'
 
 function Filemap() {
 
-  const socket = io.connect("http://localhost:3001");
-  
+    const socket = io.connect("http://localhost:3001");
 
     const context = useContext(fileContext);
 
-    const {getfolders ,folder } = context;
+
+    const [Name, setName] = useState('')
+
+    const {getfolders, folder, userdet} = context;
     const navigate =useNavigate()
 
-    const send_user = (user) => {
-      socket.emit("send_person", user);
+    const set_user = (user) => {
+      socket.emit("set_user", user);
     }
   
     const send_link = (user,link) =>{
       socket.emit("send_link", { link, user });
     }
   
-    socket.on("receive_link", (data) => {
+    socket.on("receive_link", (data) => { 
       console.log(data.user ,data.link);
     });
 
 
   const firstTime  = async () =>{
-    // eslint-disable-next-line
+
     let data = await getfolders('5ce819935e539c343f141ece');
+    let UserData = await userdet();
+    
+    set_user(UserData.name);
+  }
+
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    send_link('asdfasdfa3e' ,'UWU');
+    console.log(Name);
   }
 
 
@@ -57,14 +73,19 @@ function Filemap() {
                 {folder.map((element,index) => {
                     return (
                         <div className='col md-4' key={element._id}>
-                            <Files key={element._id} element = {element} send_link={send_link} send_user={send_user}/>
+                            <Files key={element._id} element = {element}/>
                         </div>
                     )
                 })}
             </div>
         </div>
+        
         <Add/>
         <Addfile/>
+        <form>
+          <input type='text' name='wth' id='wth' value={Name} onChange={handleChange}/>
+          <button type="button" className="btn btn-primary" onClick={handleClick}>Primary</button>
+        </form>
         <Back/>
     </>
   )

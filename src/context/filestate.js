@@ -40,7 +40,6 @@ function FileState(props) {
     }
 
     const userdet = async () =>{
-
       const response = await fetch(`${host}/api/auth/Userdet`, {
         method: "POST",
         headers: {
@@ -49,7 +48,7 @@ function FileState(props) {
       });
 
       const json = await response.json();
-      return json;  
+      return json;
     }
 
     const redo = async (parentPass) =>{

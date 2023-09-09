@@ -15,15 +15,18 @@ const io = new Server(server, {
   },
 });
 
+let users = {}
+
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
-
-  socket.on("send_person", (user) => {
-    socket.join(user);
-  });
+  console.log(users);
+  socket.on("set_user", (user) => {
+    users[user] = socket.id;
+  })
 
   socket.on("send_link", (data) => {
-    socket.to(data.user).emit("receive_link", data);
+    console.log('Ara ara');
+    socket.to(users[data.user]).emit("receive_link", data);
   });
 });
 
