@@ -84,7 +84,7 @@ function Filemap() {
         <Addfile/>
         <form>
           <input type='text' name='wth' id='wth' value={Name} onChange={handleChange}/>
-          <button type="button" className="btn btn-primary" onClick={handleClick}>Primary</button>
+          <button type="button" className="btn btn-primary" onClick={handleClick}>Send</button>
         </form>
         <Back/>
     </>

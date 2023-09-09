@@ -39,6 +39,34 @@ router.post('/upload' ,fetchUser ,upload.single("file") ,async (req,res)=>{
     }
 })
 
+router.post('/share/:id', fetchUser, async (req,res)=>{
+  try {
+      
+    let fileShare = await File.findById(req.params.id);
+
+    if (!fileShare) {
+      return res.status(400).send("file doesnt exist");
+    }
+
+      const fileData = {
+          user : req.user.id,
+          name : fileShare.name,
+          path: fileShare.path,
+          originalName: fileShare.originalName,
+          parent : '5ce819935e539c343f141ece'
+      }
+
+      const file = await File.create(fileData)
+      let success = true
+      res.send(success)
+
+  } catch (error) {
+      console.log(error.message);
+      res.status(500).send("some error occuredss")
+  }
+})
+
+
 //auth token nikal aur file show download nahi
 
 router.get("/getfile/:id" , async (req, res) => {

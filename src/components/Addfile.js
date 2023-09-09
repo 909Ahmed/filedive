@@ -34,8 +34,10 @@ function Addfile() {
     <>
         <div className='container'>
             <form onSubmit={submit}>
-                <input type="file" name="file" required />
-                <button type="submit">Add</button>
+                <label class="file-upload">
+                    <input type="file" name='file' required/> Add PDF
+                </label>
+                <button type="submit" className="btn btn-primary">Add</button> 
             </form>
         </div>
     </>
