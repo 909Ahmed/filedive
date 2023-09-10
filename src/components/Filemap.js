@@ -9,7 +9,7 @@ import Addfile from './Addfile';
 import io from 'socket.io-client'
 
 
-function Filemap() {
+function Filemap(props) {
 
     const socket = io.connect("http://localhost:3001");
 
@@ -67,13 +67,12 @@ function Filemap() {
    
     return (
     <>
-       
         <div className='last container my-5'>
             <div className='row'>
                 {folder.map((element,index) => {
                     return (
                         <div className='col md-4' key={element._id}>
-                            <Files key={element._id} element = {element}/>
+                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit}/>
                         </div>
                     )
                 })}

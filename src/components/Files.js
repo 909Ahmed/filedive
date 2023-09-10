@@ -13,6 +13,8 @@ function Files(props) {
     y : 0
   }
 
+  let {permit, setpermit} = props;
+
   const navigate = useNavigate();
   const context = useContext(fileContext);
 
@@ -22,48 +24,51 @@ function Files(props) {
   const [contextMenu, setcontextMenu] = useState(initial);
 
   const dbl = () => {
-    setchange(false)
+    setchange(false);
   }
 
-  const enter = async (event) => {
-    if (event.code === 'Enter') {
-      // await naming(props.element._id ,name);
-      setchange(true);
-      setcontextMenu(initial);
-    }
+  const handleClick = (event) => {
+    setcontextMenu(initial);
   }
-
-  document.addEventListener('keydown', (event) => {enter(event)} );
-    // if (event.code === 'Enter') {
-    //   setchange(true);
-    //   setcontextMenu(initial);
-    //   naming(props.element._id ,name);
-    // }
-  
 
   const handleContext = (e) => {
     e.preventDefault();
+    setpermit(true);
     setcontextMenu({show : true, x : e.pageX, y : e.pageY})
   }
 
-  const onChange = (e)=>{
-    setname(e.target.value)
+  const onChange = (e) => {
+    setname(e.target.value);
   }
+
+  const handleEnter = (e) => {
+    if (e.code === 'Enter') {
+      setchange(true);
+      naming(props.element._id ,name);
+    }
+  } 
+
+  useEffect(() => {
+    if (!permit) {
+      setcontextMenu(initial)
+    }
+  }, [permit])
+  
 
   return (
     <>  
-        {contextMenu.show && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id}/>}
-
-        <div className='file container' onContextMenu={handleContext}>
+        {contextMenu.show &&  permit && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id}/>}
+        <div className='file container' onContextMenu={handleContext} onClick={handleClick}>
             <div className='d-flex my-5' style={{flexDirection:`column`}}>
               {!name.includes('pdf') &&  <div onClick={()=>{getfolders(props.element._id);parent = props.element._id}}><i className="fa-solid fa-folder" style={{color: `#f0d314`,fontSize:`5em`}}></i></div>}
               {name.includes('pdf') &&  <div onClick={() => {settitle(name);navigate('/view')}}><i className="fa-solid fa-file-lines" style={{color: '#d62424' ,fontSize:`4em`,marginTop:'0.2em'}}></i></div>}
               {change && <div onDoubleClick={dbl} className='name' style={{marginTop:`2px`}}>{name}</div>}
-              {!change && <div><input type="text" className="name" value={name} onChange={onChange}/></div>}
+              {!change && <div><input type="text" className="name" value={name} onChange={onChange} onKeyDown={handleEnter}/></div>}
             </div>
         </div>
+        {/* {document.removeEventListener('keydown', handler)} */}
     </>
   )
 }
 
-export default Files
+export default Files
