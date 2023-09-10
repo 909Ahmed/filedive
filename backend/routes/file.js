@@ -3,6 +3,7 @@ const router = express.Router();
 const File = require('../modules/File')
 let fetchUser = require('../middleware/fetchUser');
 const multer = require('multer')
+let path = require('path')
 
 // const upload = multer({ dest: "src/uploads" })
 
@@ -73,16 +74,15 @@ router.get("/getfile/:id" , async (req, res) => {
 
   const file = await File.findById(req.params.id) 
 
+  const filePath =  path.join(__dirname, "..\\..\\" ,file.path);
 
-  const filePath = path.join(__dirname, file.path);
-
-    res.sendFile(filePath, { root: '/' }, (err) => {
-      if (err) {
-        console.error('Error sending file:', err);
-      }
-    });
     
-    res.sendFile(file.path, file.originalName)
+  res.download(filePath, file.originalName, (err) => {
+    if (err) {
+      console.error('Error downloading file:', err);
+      res.status(404).send('File not found');
+    }
+  });
 });
 
 router.delete('/deletefile/:id', async (req,res)=>{

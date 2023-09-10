@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import fileContext from '../context/filecontext';
 import { useNavigate } from 'react-router-dom';
 import Context from './Context';
+import socket from './Socket';
 
 function Files(props) {
   
@@ -13,7 +14,7 @@ function Files(props) {
     y : 0
   }
 
-  let {permit, setpermit, socket} = props;
+  let {permit, setpermit} = props;
 
   const ref = useRef(null);
 
@@ -94,7 +95,7 @@ function Files(props) {
         </div>
 
 
-        {contextMenu.show &&  permit && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id} name={props.element.name} socket={props.socket}/>}
+        {contextMenu.show &&  permit && <Context key={props.element._id} x={contextMenu.x} y={contextMenu.y} id={props.element._id} name={props.element.name} />}
         
         <div className='file container' onContextMenu={handleContext} onClick={handleClick}>
             <div className='d-flex my-5' style={{flexDirection:`column`}}>
