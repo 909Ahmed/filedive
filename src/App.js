@@ -24,6 +24,10 @@ function App() {
     setpermit(false);
   }
 
+  socket.on("receive_link", (data) => { 
+    console.log(data.Name ,data.id);
+  });
+
   document.addEventListener('click', handler);
   return (
     <>
@@ -32,7 +36,7 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Routes>
-          <Route exact path="/" element={<Filemap key="account" permit={permit} setpermit={setpermit}/>}></Route>
+          <Route exact path="/" element={<Filemap key="account" permit={permit} setpermit={setpermit} socket={socket}/>}></Route>
           <Route exact path='/login' element={<Verify go="login" key="login"/>}></Route>
           <Route exact path='/sign' element={<Verify go="sign" key="signup"/>}></Route>
           <Route exact path='/view' element={<View key="pdfView"/>}></Route>

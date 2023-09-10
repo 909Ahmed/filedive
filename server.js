@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
 
   socket.on("send_link", (data) => {
     console.log('Ara ara');
-    socket.to(users[data.user]).emit("receive_link", data);
+    socket.to(users[data.Name]).emit("receive_link", data);
   });
 });
 

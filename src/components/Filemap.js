@@ -12,20 +12,14 @@ function Filemap(props) {
 
     const context = useContext(fileContext);
 
+    let {socket} = props;
+
     const {getfolders, folder, userdet} = context;
     const navigate =useNavigate()
 
-    // const set_user = (user) => {
-    //   socket.emit("set_user", user);
-    // }
-  
-    // const send_link = (user,link) =>{
-    //   socket.emit("send_link", { link, user });
-    // }
-  
-    // socket.on("receive_link", (data) => { 
-    //   console.log(data.user ,data.link);
-    // });
+    const set_user = (user) => {
+      socket.emit("set_user", user);
+    }
 
 
   const firstTime  = async () =>{
@@ -33,19 +27,9 @@ function Filemap(props) {
     let data = await getfolders('5ce819935e539c343f141ece');
     let UserData = await userdet();
     
-    // set_user(UserData.name);
+    set_user(UserData.name);
   }
 
-
-  // const handleChange = (e) => {
-  //   setName(e.target.value);
-  // }
-
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   send_link('asdfasdfa3e' ,'UWU');
-  //   console.log(Name);
-  // }
 
 
   useEffect(() => {
@@ -66,7 +50,7 @@ function Filemap(props) {
                 {folder.map((element,index) => {
                     return (
                         <div className='col md-4' key={element._id}>
-                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit}/>
+                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit} socket={socket}/>
                         </div>
                     )
                 })}
@@ -75,10 +59,6 @@ function Filemap(props) {
         
         <Add/>
         <Addfile/>
-        {/* <form>
-          <input type='text' name='wth' id='wth' value={Name} onChange={handleChange}/>
-          <button type="button" className="btn btn-primary" onClick={handleClick}>Send</button>
-        </form> */}
         <Back/>
     </>
   )

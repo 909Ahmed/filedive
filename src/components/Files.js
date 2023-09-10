@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from 'react'
+import React, { useState ,useEffect, useRef } from 'react'
 import { useContext } from 'react';
 import fileContext from '../context/filecontext';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,9 @@ function Files(props) {
     y : 0
   }
 
-  let {permit, setpermit} = props;
+  let {permit, setpermit, socket} = props;
+
+  const ref = useRef(null);
 
   const navigate = useNavigate();
   const context = useContext(fileContext);
@@ -22,6 +24,20 @@ function Files(props) {
   const [name, setname] = useState(props.element.name)
   const [change, setchange] = useState(true)
   const [contextMenu, setcontextMenu] = useState(initial);
+
+
+  const [Name, setName] = useState('');
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  }
+  
+  const send_link = () =>{
+    ref.current.click();
+    let id = props.element._id;
+    socket.emit("send_link", {id, Name});
+  }
+
 
   const dbl = () => {
     setchange(false);
@@ -57,7 +73,29 @@ function Files(props) {
 
   return (
     <>  
-        {contextMenu.show &&  permit && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id} name={props.element.name}/>}
+
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Share</h1>
+                <button ref={ref} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="check modal-body">
+
+                <input type="text" className="form-control" onChange={handleChange} id="name" name="name" />
+
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={send_link}>Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {contextMenu.show &&  permit && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id} name={props.element.name} socket={props.socket}/>}
+        
         <div className='file container' onContextMenu={handleContext} onClick={handleClick}>
             <div className='d-flex my-5' style={{flexDirection:`column`}}>
               {!name.includes('pdf') &&  <div onClick={()=>{getfolders(props.element._id);parent = props.element._id;}}><i className="fa-solid fa-folder" style={{color: `#f0d314`,fontSize:`5em`}}></i></div>}
