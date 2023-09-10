@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Filemap from './components/Filemap';
 import FileState from './context/filestate';
 import Verify from './components/Verify';
+import io from 'socket.io-client'
 
 
 import {
@@ -14,6 +15,8 @@ import {
 import View from './components/View';
 
 function App() {
+
+  const socket = io.connect("http://localhost:3001");
 
   const [permit, setpermit] = useState(false);
 

@@ -57,19 +57,19 @@ router.put('/updatename/:id', async (req,res)=>{
     }
 })
 
-// router.delete('/deletefolder/:id', async (req,res)=>{
+router.delete('/deletefolder/:id', async (req,res)=>{
 
-//     try {
+    try {
         
-//         let folder = await Folder.findByIdAndDelete(req.params.id)
-//         res.json(folder);    
+        let folder = await Folder.findByIdAndDelete(req.params.id)
+        res.json(folder);    
     
-//     } catch (error) {
-//         console.log(error.message);
-//         res.status(500).send("some error occured")
-//     }
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("some error occured")
+    }
     
-// })
+})
 
 
 

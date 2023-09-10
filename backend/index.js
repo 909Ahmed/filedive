@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 
 //Routes
 
-app.use('/api/folder',require('./routes/Folder'));
+app.use('/api/folder',require('./routes/folder'));
 app.use('/api/auth',require('./routes/auth'));
 app.use('/api/file',require('./routes/file'));
 

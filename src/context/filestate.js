@@ -86,7 +86,7 @@ function FileState(props) {
     
     return (
     <>
-        <fileContext.Provider value={{folder , getfolders ,addfolder ,parent ,redo ,naming ,settitle ,title ,userdet}}>
+        <fileContext.Provider value={{folder,setfolder , getfolders ,addfolder ,parent ,redo ,naming ,settitle ,title ,userdet}}>
             {props.children}
         </fileContext.Provider>
     </>

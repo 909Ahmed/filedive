@@ -6,7 +6,7 @@ function Addfile() {
 
     const context = useContext(fileContext);
 
-    const {addfolder ,parent} = context;
+    const {folder, setfolder ,parent} = context;
 
     const submit = async (e) => {
         e.preventDefault();
@@ -25,9 +25,11 @@ function Addfile() {
             });
 
             const json = await response.json();
+            setfolder(folder.concat(json));
         } catch (error) {
             console.error('Error uploading PDF:', error);
         }
+        //add the file instantly
     }
 
     return (

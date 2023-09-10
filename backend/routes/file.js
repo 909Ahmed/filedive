@@ -31,7 +31,7 @@ router.post('/upload' ,fetchUser ,upload.single("file") ,async (req,res)=>{
 
         const file = await File.create(fileData)
         let success = true
-        res.send(success)
+        res.send(file)
 
     } catch (error) {
         console.log(error.message);
@@ -84,5 +84,19 @@ router.get("/getfile/:id" , async (req, res) => {
     
     res.sendFile(file.path, file.originalName)
 });
+
+router.delete('/deletefile/:id', async (req,res)=>{
+
+  try {
+      
+      let file = await File.findByIdAndDelete(req.params.id)
+      res.json(file);    
+  
+  } catch (error) {
+      console.log(error.message);
+      res.status(500).send("some error occured")
+  }
+  
+})
 
 module.exports = router

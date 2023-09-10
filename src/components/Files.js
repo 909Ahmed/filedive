@@ -27,7 +27,7 @@ function Files(props) {
     setchange(false);
   }
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     setcontextMenu(initial);
   }
 
@@ -57,16 +57,15 @@ function Files(props) {
 
   return (
     <>  
-        {contextMenu.show &&  permit && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id}/>}
+        {contextMenu.show &&  permit && <Context x={contextMenu.x} y={contextMenu.y} id={props.element._id} name={props.element.name}/>}
         <div className='file container' onContextMenu={handleContext} onClick={handleClick}>
             <div className='d-flex my-5' style={{flexDirection:`column`}}>
-              {!name.includes('pdf') &&  <div onClick={()=>{getfolders(props.element._id);parent = props.element._id}}><i className="fa-solid fa-folder" style={{color: `#f0d314`,fontSize:`5em`}}></i></div>}
+              {!name.includes('pdf') &&  <div onClick={()=>{getfolders(props.element._id);parent = props.element._id;}}><i className="fa-solid fa-folder" style={{color: `#f0d314`,fontSize:`5em`}}></i></div>}
               {name.includes('pdf') &&  <div onClick={() => {settitle(name);navigate('/view')}}><i className="fa-solid fa-file-lines" style={{color: '#d62424' ,fontSize:`4em`,marginTop:'0.2em'}}></i></div>}
               {change && <div onDoubleClick={dbl} className='name' style={{marginTop:`2px`}}>{name}</div>}
               {!change && <div><input type="text" className="name" value={name} onChange={onChange} onKeyDown={handleEnter}/></div>}
             </div>
         </div>
-        {/* {document.removeEventListener('keydown', handler)} */}
     </>
   )
 }
