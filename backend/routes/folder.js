@@ -7,12 +7,43 @@ const File = require('../modules/File')
 
 router.post('/fetchfolders',fetchUser ,async (req,res)=>{
     try {
-        let folders = await Folder.find({parent : req.body.parent ,user : req.user.id})
-        let files = await File.find({parent : req.body.parent ,user : req.user.id})
-        res.json(folders.concat(files))
+        
+        if (req.body.parent === '5ce819935e539c343f141ece') {
+            let folders = await Folder.find({parent : req.body.parent ,user : req.user.id})
+            let files = await File.find({parent : req.body.parent ,user : req.user.id})
+            
+            res.json(folders.concat(files))
+        
+        } else {
+            let folders = await Folder.find({parent : req.body.parent})
+            let files = await File.find({parent : req.body.parent})
+            
+            res.json(folders.concat(files))
+        }
     } catch (error) {
         console.log(error.message);
         res.status(500).send("some error occured")
+    }
+})
+
+router.post('/sharefolder/:id', fetchUser, async (req, res) => {
+    
+    try {
+        
+        let folder = await Folder.findOne({_id : req.params.id});
+
+        let superParent = '5ce819935e539c343f141ece';
+        console.log(folder.name);
+        let newfolder = new Folder({
+            user : req.user.id, name : folder.name, parent : superParent
+        })
+
+        const saved = await newfolder.save();
+        res.json(saved);
+
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("file cant be shared");
     }
 })
 

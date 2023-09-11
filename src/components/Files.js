@@ -36,7 +36,8 @@ function Files(props) {
   const send_link = () =>{
     ref.current.click();
     let id = props.element._id;
-    socket.emit("send_link", {id, Name});
+    let user = props.user;
+    socket.emit("send_link", {id, Name, user});
   }
 
 

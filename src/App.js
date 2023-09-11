@@ -12,6 +12,7 @@ import {
   Routes
 } from "react-router-dom";
 import View from './components/View';
+import Message from './components/Message';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </FileState>  
+    <Message/>
     </>
   );
     

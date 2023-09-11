@@ -11,6 +11,7 @@ import socket from './Socket';
 function Filemap(props) {
 
     const context = useContext(fileContext);
+    let user = '';
 
 
     const {getfolders, folder, userdet} = context;
@@ -27,11 +28,8 @@ function Filemap(props) {
     let UserData = await userdet();
     
     set_user(UserData.name);
+    user = UserData.name;
   }
-
-  socket.on("receive_link", (data) => { 
-    console.log(data.Name ,data.id);
-  });
 
   useEffect(() => {
     
@@ -52,7 +50,7 @@ function Filemap(props) {
                 {folder.map((element,index) => {
                     return (
                         <div className='col md-4' key={element._id}>
-                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit}/>
+                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit} user={user}/>
                         </div>
                     )
                 })}
