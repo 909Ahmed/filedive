@@ -30,7 +30,12 @@ function Message() {
         let file = data.file;
         let id = data.id;
         setmessage(message.concat({from, file, id}));
-    });
+      });
+
+      const remove = (id) => {
+        let temp = message.filter ((ele) => {return ele.id != id})
+        setmessage(temp);
+      }
   
     return (
     <>
@@ -44,8 +49,8 @@ function Message() {
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title">{element.file}</h5>
-                                <button type="button" onClick={() => {Share(element.id)}} className="btn btn-success">Accept</button>
-                                <button type="button" className="btn btn-danger mx-2">Decline</button>
+                                <button type="button" onClick={() => {Share(element.id);remove(element.id)}} className="btn btn-success">Accept</button>
+                                <button type="button" onClick={() => {remove(element.id)}} className="btn btn-danger mx-2">Decline</button>
                             </div>
                         </div>
                     </div>
