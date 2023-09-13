@@ -18,16 +18,21 @@ const io = new Server(server, {
 let users = {}
 
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-  console.log(users);
   socket.on("set_user", (user) => {
     users[user] = socket.id;
   })
 
+  console.log(`User Connected: ${socket.id}`);
+  console.log(users);
+
   socket.on("send_link", (data) => {
-    console.log('Ara ara');
     socket.to(users[data.Name]).emit("receive_link", data);
   });
+
+});
+
+io.on('disconnect', () => {
+  users = {};
 });
 
 server.listen(3001, () => {

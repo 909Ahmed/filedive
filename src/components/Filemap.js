@@ -11,8 +11,8 @@ import socket from './Socket';
 function Filemap(props) {
 
     const context = useContext(fileContext);
-    let user = '';
-
+    const [user, setuser] = useState('');
+    const [cred, setcred] = useState({name : '',id :''});
 
     const {getfolders, folder, userdet} = context;
     const navigate =useNavigate()
@@ -28,7 +28,7 @@ function Filemap(props) {
     let UserData = await userdet();
     
     set_user(UserData.name);
-    user = UserData.name;
+    setuser(UserData.name);
   }
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function Filemap(props) {
                 {folder.map((element,index) => {
                     return (
                         <div className='col md-4' key={element._id}>
-                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit} user={user}/>
+                            <Files key={element._id} element = {element} permit={props.permit} setpermit={props.setpermit} user={user} cred={cred} setcred={setcred}/>
                         </div>
                     )
                 })}
