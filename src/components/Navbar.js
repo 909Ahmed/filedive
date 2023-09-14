@@ -19,6 +19,9 @@ function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link text-white" to="/">Link</Link>
                         </li>
+                        <li className='nav-item'>
+                            <a className="nav-link text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Inbox</a>
+                        </li>
                     </ul>
                 </div>
             </div>

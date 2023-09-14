@@ -39,24 +39,35 @@ function Message() {
   
     return (
     <>
-        <div className='msg'>
-            {message.map((element,index) => {
-                return (
+
+
+        <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasExampleLabel">Inbox</h5>
+            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div className="offcanvas-body">
+              <div className='msg'>
+                {message.map((element, index) => {
+                  return (
                     <div className='sgl' key={element.id}>
-                        <div className="card">
-                            <div className="card-header">
-                                {element.from}
-                            </div>
-                            <div className="card-body">
-                                <h5 className="card-title">{element.file}</h5>
-                                <button type="button" onClick={() => {Share(element.id);remove(element.id)}} className="btn btn-success">Accept</button>
-                                <button type="button" onClick={() => {remove(element.id)}} className="btn btn-danger mx-2">Decline</button>
-                            </div>
+                      <div className="card">
+                        <div className="card-header">
+                          {element.from}
                         </div>
+                        <div className="card-body">
+                          <h5 className="card-title">{element.file}</h5>
+                          <button type="button" onClick={() => { Share(element.id); remove(element.id) }} className="btn btn-success">Accept</button>
+                          <button type="button" onClick={() => { remove(element.id) }} className="btn btn-danger mx-2">Decline</button>
+                        </div>
+                      </div>
                     </div>
-                )
-            })}
+                  )
+                })}
+              </div>
+          </div>
         </div>
+
     </>
   )
 }
