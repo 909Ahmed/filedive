@@ -59,11 +59,7 @@
 }
 
 .back{
-  position: fixed;
-  z-index: 10;
-  bottom: 10%;
-  left: 10%;
-  font-size: 4em;
+  font-size: 2em;
   cursor: pointer;
 }
 
@@ -182,4 +178,22 @@ input[type="file"] {
 
 .list{
   margin-left: 5px;
+}
+
+.items{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.navlist{
+  margin: 0;
+  padding: 0;
+  font-size: larger;
+}
+
+.listI{
+  display: inline-block;
+  margin-right: 10px;
 }

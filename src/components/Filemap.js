@@ -3,7 +3,6 @@ import { useEffect ,useContext ,useState} from 'react'
 import Files from './Files';
 import fileContext from '../context/filecontext';
 import Add from './Add';
-import Back from './Back';
 import { useNavigate } from 'react-router-dom';
 import Addfile from './Addfile';
 import socket from './Socket';
@@ -59,7 +58,6 @@ function Filemap(props) {
         
         <Add/>
         <Addfile/>
-        <Back/>
     </>
   )
 }

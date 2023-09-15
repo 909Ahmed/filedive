@@ -47,6 +47,7 @@ function Message() {
             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body">
+              {message.length === 0 && <span>No new messages</span>}
               <div className='msg'>
                 {message.map((element, index) => {
                   return (
