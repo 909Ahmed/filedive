@@ -9,35 +9,34 @@ function Add(props) {
     const context = useContext(fileContext);
 
     const {addfolder ,parent} = context;
-    const [current_rotation, setcurrent_rotation] = useState(360)
 
-    
+    let status = true;
+
     const rotate = () => {
-      setcurrent_rotation(current_rotation+360);
-      console.log(current_rotation);
-      document.querySelector(".add").style.transform = 'rotate(' + current_rotation + 'deg)';
+
+      if (status) status = false;
+      else status = true;
+      
+      console.log(status);
+
+      {status && (document.querySelector(".add").style.transform = 'rotate(180deg)')}
+      {!status && (document.querySelector(".add").style.transform = 'rotate(-180deg)')}
+      
     }
-    
-    
+
+
     useEffect(() => {
       
       document.querySelector(".add").addEventListener('click', rotate);
-      
-      return () => {
-        document.querySelector(".add").removeEventListener('click', rotate);
-      }
 
-
-    }, [current_rotation])
+    }, [])
     
     
 
   return (
     <>
         <div className='add' onClick={()=>{addfolder('NewFolder',parent)}}>
-            
-              <i className="fa-solid fa-circle-plus" style={{color : "#001dfa"}}></i>
-            
+          <i className="fa-solid fa-circle-plus" style={{color : "#001dfa"}}></i>  
         </div>
     </>
   )

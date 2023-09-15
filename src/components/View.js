@@ -10,7 +10,7 @@ function View( props ) {
 
     return (
     <>
-        <div className='view' style={{marginTop:'50px'}}>
+        <div className='view' style={{marginTop:'65px'}}>
             <embed className='pdf' src={require(`../uploads/${title}`)} type="application/pdf"/>
         </div>
     </>
