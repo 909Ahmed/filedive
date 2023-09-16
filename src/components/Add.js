@@ -8,35 +8,9 @@ function Add(props) {
 
     const context = useContext(fileContext);
 
-    const {addfolder ,parent, folder, setfolder} = context;
+    const {addfolder, submit, parent} = context;
 
     let status = true;
-
-    const submit = async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData();
-
-      formData.append('file', document.querySelector('input[name="file"]').files[0]);
-      formData.append('parent', parent);
-
-      try {
-        const response = await fetch('http://localhost:5000/api/file/upload', {
-          method: 'POST',
-          headers: {
-            "auth-token": localStorage.getItem('token')
-          },
-          body: formData
-        });
-
-        const json = await response.json();
-        setfolder(folder.concat(json));
-      } catch (error) {
-        console.error('Error uploading PDF:', error);
-      }
-      //add the file instantly
-    }
-
 
     const rotate = () => {
 

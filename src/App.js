@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Filemap from './components/Filemap';
 import FileState from './context/filestate';
 import Verify from './components/Verify';
-
+import Add from './components/Add';
 
 import {
   BrowserRouter,
@@ -43,6 +43,7 @@ function App() {
           <Route exact path='/sign' element={<Verify go="sign" key="signup"/>}></Route>
           <Route exact path='/view' element={<View key="pdfView"/>}></Route>
         </Routes>
+        <Add/>
       </BrowserRouter>
     </FileState>  
     <Message/>

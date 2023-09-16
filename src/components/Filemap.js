@@ -12,7 +12,7 @@ function Filemap(props) {
     const [user, setuser] = useState('');
     const [cred, setcred] = useState({name : '',id :''});
 
-    const {getfolders, folder, userdet} = context;
+    const {getfolders, folder, userdet, parent} = context;
     const navigate =useNavigate()
 
     const set_user = (user) => {
@@ -54,8 +54,6 @@ function Filemap(props) {
                 })}
             </div>
         </div>
-        
-        <Add/>
     </>
   )
 }

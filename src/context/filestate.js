@@ -10,6 +10,7 @@ function FileState(props) {
     const [parent, setparent] = useState('5ce819935e539c343f141ece')
     const [title , settitle] = useState('check.pdf')
 
+
     const getfolders = async (parentPass) =>{
         const response = await fetch(`${host}/api/folder/fetchfolders`, {
           method: "POST",
@@ -18,9 +19,9 @@ function FileState(props) {
             "auth-token" : localStorage.getItem('token')
           },body : JSON.stringify({parent : parentPass})
         });
+        setparent(parentPass);
         const json = await response.json();
         setfolder(json);
-        setparent(parentPass)
     }
 
     const addfolder = async (name ,Parent) =>{
@@ -37,6 +38,32 @@ function FileState(props) {
         setfolder(folder.concat(json));
         setparent(Parent)
     
+    }
+
+    const submit = async () => {
+
+      const formData = new FormData();
+      
+      formData.append('file', document.querySelector('input[name="file"]').files[0]);
+      formData.append('parent', parent);
+
+      console.log(parent);
+
+      try {
+        const response = await fetch('http://localhost:5000/api/file/upload', {
+          method: 'POST',
+          headers: {
+            "auth-token": localStorage.getItem('token')
+          },
+          body: formData
+        });
+
+        const json = await response.json();
+        // setfolder(folder.concat(json));
+      } catch (error) {
+        console.error('Error uploading PDF:', error);
+      }
+      //add the file instantly
     }
 
     const userdet = async () =>{
@@ -86,7 +113,7 @@ function FileState(props) {
     
     return (
     <>
-        <fileContext.Provider value={{folder,setfolder , getfolders ,addfolder ,parent ,redo ,naming ,settitle ,title ,userdet}}>
+        <fileContext.Provider value={{folder,setfolder , getfolders ,addfolder ,parent,submit ,redo, naming ,settitle,setparent ,title ,userdet}}>
             {props.children}
         </fileContext.Provider>
     </>
