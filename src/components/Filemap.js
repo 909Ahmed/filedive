@@ -4,7 +4,6 @@ import Files from './Files';
 import fileContext from '../context/filecontext';
 import Add from './Add';
 import { useNavigate } from 'react-router-dom';
-import Addfile from './Addfile';
 import socket from './Socket';
 
 function Filemap(props) {
@@ -57,7 +56,6 @@ function Filemap(props) {
         </div>
         
         <Add/>
-        <Addfile/>
     </>
   )
 }

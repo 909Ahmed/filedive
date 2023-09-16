@@ -94,9 +94,7 @@ input[type="file"] {
 }
 
 .file-upload {
-  border: 1px solid #ccc;
   display: inline-block;
-  padding: 6px 12px;
   cursor: pointer;
 }
 
@@ -156,18 +154,33 @@ input[type="file"] {
 }
 
 .add {
-	transition: transform 1s ease-in;
+	transition: transform 0.3s ease-in;
 }
 
 .add{
   height: 100px;
 }
 
-@keyframes AddAni {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(90deg);
-  }
+.addlist{
+  position: fixed;
+  z-index: 10;
+  bottom: 12%;
+  right: 10%;
+  font-size: 0.2rem;
+  background-color: #f0f0f0;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px;
+  transition: transform 1s ease-in;
+  opacity: 0;
+}
+
+.fol:hover {
+  cursor: pointer;
+  background-color: #aaaaaa;
+  border-radius: 4px;
+  opacity: 0.95;
 }
