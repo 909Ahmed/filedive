@@ -56,7 +56,7 @@ function Files(props) {
 
   const handleContext = (e) => {
     e.preventDefault();
-    let temp = {
+    setpermit(true);let temp = {
       name : props.element.name,
       id : props.element._id
     }
