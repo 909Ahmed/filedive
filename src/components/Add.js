@@ -8,7 +8,33 @@ function Add(props) {
 
     const context = useContext(fileContext);
 
-    const {addfolder, submit, parent} = context;
+    const {addfolder, parent} = context;
+
+    const submit = async (passparent) => {
+
+      const formData = new FormData();
+      
+      formData.append('file', document.querySelector('input[name="file"]').files[0]);
+      formData.append('parent', passparent);
+
+      console.log(passparent);
+
+      try {
+        const response = await fetch('http://localhost:5000/api/file/upload', {
+          method: 'POST',
+          headers: {
+            "auth-token": localStorage.getItem('token')
+          },
+          body: formData
+        });
+
+        const json = await response.json();
+        // setfolder(folder.concat(json));
+      } catch (error) {
+        console.error('Error uploading PDF:', error);
+      }
+      //add the file instantly
+    }
 
     let status = true;
 
@@ -46,7 +72,6 @@ function Add(props) {
       
       document.querySelector(".add").addEventListener('click', rotate);
       document.getElementById("addlist").style.transition = "all 0.5s";
-      document.getElementById('file').addEventListener('change' ,submit);
 
     }, [])
     
@@ -61,7 +86,7 @@ function Add(props) {
           <div className='fol'>
               <form>
                 <label className="file-upload">
-                  <input type="file" name='file' id='file' required/> Add PDF
+                  <input type="file" name='file' id='file' onChange={() => {submit(parent)}} required/> Add PDF
                 </label>
               </form>
           </div>
